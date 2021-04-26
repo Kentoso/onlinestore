@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="js/product.js"></script>
+    <link rel="stylesheet" href="css/style.css">
+    <title>Store</title>
+</head>
+<body>
+    <div id="order-accepted" class="disabled">Your order was accepted</div>
+    <div class="disabled" id="modal" >
+        <div id="background"></div>
+        <div id="order" class="">
+            <form action="" name="order">
+                <input type="button" onclick="document.getElementById('modal').className = 'disabled'" class="close-order-modal" value="X">
+                <p>Name:</p>
+                <input type="text" class="order-text" name="orderName" value="">
+                <p>Last name:</p>
+                <input type="text" class="order-text" name="orderLastName" value="">
+                <input type="button" onclick="confirmOrder()" value="Confirm order">
+            </form>
+        </div>
+    </div>
+    <header>
+        <select name="category" id="categorySelector" onchange="hideProductsWithoutCategory(document.getElementById('categorySelector').value)"></select>
+        <button onclick="openCart()">Cart</button>
+        <div id="cart" class="disabled">
+            <button onclick="document.getElementById('modal').className = ''">Make an order</button>
+            <div class="btn-cart-close-container">
+                <button onclick="closeCart()" class="btn-cart-close">X</button>
+            </div>
+            <div id="cart-items">
+                
+            </div>
+        </div>
+    </header>
+    <div id="products">
+    </div>
+    
+    
+    <script src="js/page.js"></script>
+    <script src="js/cart.js"></script>
+    <script>
+        let categories = ["Yellow", "Red", "Green"];
+        createCategorySelector(categories);
+        let product = new Product("media/images/apple.jpg", "Apple", 12, "Red");
+        let product1 = new Product("media/images/pineapple.jpg", "Pineapple", 144, "Yellow");
+        let product2 = new Product("media/images/pear.jpg", "Pear", 52, "Green");
+        let product3 = new Product("media/images/banana.jpg", "Banana", 134, "Yellow");
+        let products = [];
+        products.push(product, product1, product2, product3);
+        initializeProducts(products);
+        createProducts();
+        initializeCart(cart);
+        
+    </script>
+</body>
+</html>
