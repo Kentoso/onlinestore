@@ -46,6 +46,7 @@ function clearCart() {
 function deleteCart() {
     clearCart();
     localStorage.clear("cart");
+    PageCart.items = [];
 }
 function createCartItem(cartItem, index) {
     let parentNode = document.getElementById("cart-items");
