@@ -2,7 +2,7 @@ var Products;
 function initializeProducts(_products) {
     Products = _products;
 }
-
+//
 function createCategorySelector(categories) {
     let select = document.getElementById("categorySelector");
     let all = document.createElement("option");
@@ -48,7 +48,7 @@ function createProduct(product, index) {
     productNode.appendChild(productName);
     productNode.appendChild(productCost);
     productNode.appendChild(productCart);
-    
+
     document.getElementById("products").appendChild(productNode);
 } 
 
