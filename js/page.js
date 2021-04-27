@@ -30,21 +30,27 @@ function createProduct(product, index) {
     let productNode = document.createElement("div");
     productNode.id = "product" + `${index}`;
     productNode.className = "product";
+
     let productImage = document.createElement("img");
     productImage.src = product.imagePath;
+
     let productName = document.createElement("p");
     productName.innerHTML = product.name;
+
     let productCost = document.createElement("p");
     productCost.innerHTML =  "$" + product.cost;
+    
     let productCart = document.createElement("button");
     productCart.addEventListener("click", addToCart);
     productCart.innerHTML = "Add to cart";
+
     productNode.appendChild(productImage);
     productNode.appendChild(productName);
     productNode.appendChild(productCost);
     productNode.appendChild(productCart);
+    
     document.getElementById("products").appendChild(productNode);
-}
+} 
 
 function createProductsWithCategory(category) {
     removeProducts();
@@ -108,9 +114,9 @@ function confirmOrder() {
     let name = order["orderName"].value;
     let lastName = order["orderLastName"].value;
     console.log(name);
-    if (name.length > 1 && lastName.length > 1) {
-        document.getElementById("modal").className = "disabled";
-        document.getElementById("order-accepted").className = "";
+    if (name.length > 1 && lastName.length > 1 && PageCart.items.length > 0) {
+        document.getElementById("modal").classList.add("disabled");
+        document.getElementById("order-accepted").classList.remove("disabled");
         deleteCart();
     }
 }

@@ -9,12 +9,12 @@
     <title>Store</title>
 </head>
 <body>
-    <div id="order-accepted" class="disabled">Your order was accepted</div>
-    <div class="disabled" id="modal" >
-        <div id="background"></div>
-        <div id="order" class="">
+    <div id="order-accepted" class="disabled order-accepted">Your order was accepted</div>
+    <div class="disabled modal" id="modal">
+        <div id="background" class="background"></div>
+        <div id="order" class="order">
             <form action="" name="order">
-                <input type="button" onclick="document.getElementById('modal').className = 'disabled'" class="close-order-modal" value="X">
+                <input type="button" onclick="document.getElementById('modal').classList.add('disabled')" class="close-order-modal" value="X">
                 <p>Name:</p>
                 <input type="text" class="order-text" name="orderName" value="">
                 <p>Last name:</p>
@@ -26,17 +26,17 @@
     <header>
         <select name="category" id="categorySelector" onchange="hideProductsWithoutCategory(document.getElementById('categorySelector').value)"></select>
         <button onclick="openCart()">Cart</button>
-        <div id="cart" class="disabled">
-            <button onclick="document.getElementById('modal').className = ''">Make an order</button>
+        <div id="cart" class="disabled cart">
+            <button onclick="document.getElementById('modal').classList.remove('disabled')">Make an order</button>
             <div class="btn-cart-close-container">
                 <button onclick="closeCart()" class="btn-cart-close">X</button>
             </div>
-            <div id="cart-items">
+            <div id="cart-items" class="cart-items">
                 
             </div>
         </div>
     </header>
-    <div id="products">
+    <div id="products" class="products">
     </div>
     
     
@@ -45,12 +45,13 @@
     <script>
         let categories = ["Yellow", "Red", "Green"];
         createCategorySelector(categories);
-        let product = new Product("media/images/apple.jpg", "Apple", 12, "Red");
-        let product1 = new Product("media/images/pineapple.jpg", "Pineapple", 144, "Yellow");
-        let product2 = new Product("media/images/pear.jpg", "Pear", 52, "Green");
-        let product3 = new Product("media/images/banana.jpg", "Banana", 134, "Yellow");
         let products = [];
-        products.push(product, product1, product2, product3);
+        products.push(
+            new Product("media/images/apple.jpg", "Apple", 12, "Red"), 
+            new Product("media/images/pineapple.jpg", "Pineapple", 144, "Yellow"), 
+            new Product("media/images/pear.jpg", "Pear", 52, "Green"), 
+            new Product("media/images/banana.jpg", "Banana", 134, "Yellow"),
+            );
         initializeProducts(products);
         createProducts();
         initializeCart(cart);

@@ -22,11 +22,15 @@ function initializeCart() {
 
 function openCart() {
     let cart = document.getElementById("cart");
-    cart.className = cart.className == "disabled" ? cart.className = "": cart.className = "disabled";
+    if (Array.from(cart.classList).includes("disabled")) {
+        cart.classList.remove("disabled");
+        return;
+    }
+    cart.classList.add("disabled");
 }
 function closeCart() {
     let cart = document.getElementById("cart");
-    cart.className = "disabled";
+    cart.classList.add("disabled");
 }
 function createCart() {
     i = 0;
@@ -49,36 +53,44 @@ function deleteCart() {
     PageCart.items = [];
 }
 function createCartItem(cartItem, index) {
-    let parentNode = document.getElementById("cart-items");
     let itemContainer = document.createElement("div");
     itemContainer.className = "cart-item";
+
     let itemImage = document.createElement("img");
     itemImage.src = cartItem.product.imagePath;
+
     let itemName = document.createElement("p");
     itemName.innerHTML = cartItem.product.name;
+
     let itemCost = document.createElement("p");
     itemCost.innerHTML = "$" + cartItem.product.cost;
+
     let itemCount = document.createElement("input");
     itemCount.className = "item-count";
     itemCount.value = cartItem.amount;
     itemCount.id = Products.findIndex(x => x.name == cartItem.product.name);
     itemCount.dataset.itemId = index;
     itemCount.disabled = true;
+
     let itemCountDecrement = document.createElement("button");
     itemCountDecrement.innerHTML = "-";
     itemCountDecrement.addEventListener('click', decrementItemCount);
+
     let itemCountIncrement = document.createElement("button");
     itemCountIncrement.innerHTML = "+";
     itemCountIncrement.addEventListener('click', incrementItemCount);
+
     let itemCountContainer = document.createElement("div");
     itemCountContainer.appendChild(itemCountDecrement);
     itemCountContainer.appendChild(itemCount);
     itemCountContainer.appendChild(itemCountIncrement);
+
     itemContainer.appendChild(itemImage);
     itemContainer.appendChild(itemName);
     itemContainer.appendChild(itemCost);
     itemContainer.appendChild(itemCountContainer);
-    parentNode.appendChild(itemContainer);
+    
+    document.getElementById("cart-items").appendChild(itemContainer);
 }
 function incrementItemCount(ev) {
     let id = findCartItemId(ev);
